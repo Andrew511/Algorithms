@@ -1,4 +1,4 @@
-package A6;/*  A6.java - Driver code
+/*  A6.java - Driver code
 *
 *  @version CS 321 - Fall 2018 - A6
 *

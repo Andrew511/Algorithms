@@ -1,4 +1,4 @@
-package A6;/* SLIT.java - Two solutions to the SLIT problem
+ /* SLIT.java - Two solutions to the SLIT problem
 *
 *  @version CS 321 - Fall 2018 - A6
 *
@@ -6,9 +6,9 @@ package A6;/* SLIT.java - Two solutions to the SLIT problem
 *
 *  @author Blake Bostwick
 *
-*  @bug The brute-force algorithm [does/does not] work fully. [delete one]
+*  @bug The brute-force algorithm [does] work fully.
 *
-*  @bug The faster algorithm  [does/does not] work fully. [delete one]
+*  @bug The faster algorithm  [does] work fully.
 *
 */
 
@@ -42,6 +42,9 @@ class SLIT {
               if (mat[r + i][c + j] == 'T') {
                   countT++;
               }
+              else {
+                  countT--;
+              }
           }
       }
 
@@ -69,32 +72,48 @@ class SLIT {
   */
   static int algorithm2(char[][] m,int n) {
 
-    return mergeCount(m, 0, n/2, n, 0, n);
+    return mergeCount(m, 0, n-2, 0, n-1);
   }// algorithm2 method
 
   /* implement your helper method(s) below this point
   */
 
-  static int mergeCount(char[][] mat, int left, int mid, int right, int top, int bot) {
-      if (left >= right && top >= bot) {
-          return getTDiff(mat, left, top, right - left);
-      }
-      else if (top - bot ==1) {
-          return Math.max(getTDiff(mat, left, top, right-left  ) , Math.max(mergeCount(mat, left, (left + mid)/2, mid, top, bot), mergeCount(mat, mid, (mid+right)/2, right, top, bot) ));
-      }
-      else if (left - right ==1) {
-          return Math.max(getTDiff(mat, left, top, right-left  ) , Math.max(mergeCount(mat, left, mid, right, top, bot/2), mergeCount(mat, left, mid, right, (top+bot)/2, bot) ));
-      }
-      else {
-          int leftMaxT = Math.max(mergeCount(mat, left, (left + mid)/2, mid, top, bot/2), mergeCount(mat, left, (left + mid)/2, mid, (top+bot)/2, bot));
-          int rightMaxT = Math.max(mergeCount(mat, mid, (mid+right)/2, right, top, bot/2), mergeCount(mat, mid, (mid+right)/2, right, (top+bot)/2, bot));
+  static int mergeCount(char[][] mat, int left, int right, int top, int bot) {
+      if ( right - left <= 1 && bot - top <= 1) {
+          return count(mat, top, left, right - left);
+        }
+       int mid = (left+right)/2;
+      if (bot - top > 1) {
+            return Math.max(mergeCount(mat, left, right, top, (top+bot)/2),
+                            mergeCount(mat, left, right, (top+bot)/2, bot)); 
+        }
+        else {
+            int maxL = mergeCount(mat, left, mid, top, bot);
+            int maxR = mergeCount(mat, mid + 1,right,top,bot);
+            
+            int maxSumL = 0;
+            int sum = 0;
+            for (int i = mid; i >= left; i--) {
+                sum += count(mat,top,i,1); //only want the single pair
+                if (sum > maxSumL) {
+                    maxSumL = sum;
+                }
+            }
+            
+            int maxSumR = 0;
+            sum = 0;
+            for (int i = mid + 1; i <= right; i++) {
+                sum += count(mat,top,i,1);
+                if (sum > maxSumR) {
+                    maxSumR = sum;
+                }
+            }
 
-          return Math.max(getTDiff(mat, left,top, right-left), Math.max(leftMaxT,rightMaxT));
-      }
-  }
-
-  static int getTDiff(char[][] mat, int r,int c, int w) {
-        return (2 * count(mat, r, c, w)) - (w * 2);
+            return Math.max(Math.max(
+                                maxL,
+                                maxR),
+                            (maxSumL + maxSumR));
+        }
   }
 
 }// SLIT class
