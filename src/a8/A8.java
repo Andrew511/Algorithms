@@ -265,7 +265,7 @@ class A8 {
                 break; // if invalid algorithm, don't keep iterating
             }
 
-            System.out.println(array_size + ": " + timeToRun);
+            System.out.println(n + ": " + timeToRun);
         }
 
     }// part7 method
