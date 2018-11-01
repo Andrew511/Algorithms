@@ -62,7 +62,7 @@ class A8 {
                 break; // if invalid algorithm, don't keep iterating
             }
 
-            System.out.println(array_size + "," + timeToRun);
+            System.out.println(array_size + ": " + timeToRun);
             if (timeToRun > (60 * 5)) {
                 break; //if a single run takes more than 5 minutes, break out of loop
             }
@@ -113,7 +113,7 @@ class A8 {
                 break; // if invalid algorithm, don't keep iterating
             }
 
-            System.out.println(array_size + "," + timeToRun);
+            System.out.println(array_size + ": " + timeToRun);
             if (timeToRun > (60 * 5)) {
                 break; //if a single run takes more than 5 minutes, break out of loop
             }
@@ -164,7 +164,7 @@ class A8 {
                 break; // if invalid algorithm, don't keep iterating
             }
 
-            System.out.println(array_size + "," + timeToRun);
+            System.out.println(array_size + ": " + timeToRun);
             if (timeToRun > (60 * 5)) {
                 break; //if a single run takes more than 5 minutes, break out of loop
             }
@@ -214,7 +214,7 @@ class A8 {
                 break; // if invalid algorithm, don't keep iterating
             }
 
-            System.out.println(array_size + "," + timeToRun);
+            System.out.println(array_size + ": " + timeToRun);
             if (timeToRun > (60 * 5)) {
                 break; //if a single run takes more than 5 minutes, break out of loop
             }
@@ -265,7 +265,7 @@ class A8 {
                 break; // if invalid algorithm, don't keep iterating
             }
 
-            System.out.println(array_size + "," + timeToRun);
+            System.out.println(array_size + ": " + timeToRun);
             if (timeToRun > (60 * 5)) {
                 break; //if a single run takes more than 5 minutes, break out of loop
             }
