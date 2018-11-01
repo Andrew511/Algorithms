@@ -266,10 +266,6 @@ class A8 {
             }
 
             System.out.println(array_size + ": " + timeToRun);
-            if (timeToRun > (60 * 5)) {
-                break; //if a single run takes more than 5 minutes, break out of loop
-            }
-            array_size = array_size * 2;
         }
 
     }// part7 method
