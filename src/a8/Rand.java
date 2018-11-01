@@ -41,7 +41,7 @@ class Rand {
         rnd.setSeed(seed);
 
         for (int i = a.length - 1; i > 0; i--) {
-            int j = rnd.nextInt(i + 1); //nextInt upper bound is EXCLUSIVE
+            int j = rnd.nextInt(i + 1); //nextInt upper bound is EXCLUSIVE, so go 1 more to include i
 
             swap(a, i, j);
         }
@@ -134,7 +134,7 @@ class Rand {
         //3.
         for (int i = n - 1; i > 0; i--) {
             if (doSwap[i] == 1) {
-                int j = rnd.nextInt(i + 1); //nextInt upper bound is EXCLUSIVE
+                int j = rnd.nextInt(i + 1); //nextInt upper bound is EXCLUSIVE, so go 1 more to include i
                 swap(a, i, j);
             }
         }

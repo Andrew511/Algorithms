@@ -23,7 +23,7 @@ class Sort {
         algo1Helper(a, 0, a.length - 1);
         long end = System.currentTimeMillis();
 
-        float timeToSort = (start - end) / 1000f;
+        double timeToSort = (start - end) / 1000.0;
 
         return timeToSort;
     }// algo1 method
@@ -71,7 +71,7 @@ class Sort {
         algo2Helper(a, 0, a.length - 1);
         long end = System.currentTimeMillis();
 
-        float timeToSort = (start - end) / 1000f;
+        double timeToSort = (start - end) / 1000.0;
 
         return timeToSort;
     }// algo2 method
@@ -125,7 +125,7 @@ class Sort {
         Arrays.sort(a);
         long end = System.currentTimeMillis();
 
-        float timeToSort = (start - end) / 1000f;
+        double timeToSort = (start - end) / 1000.0;
 
         return timeToSort;
     }// algo3 method
