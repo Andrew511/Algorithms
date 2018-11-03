@@ -279,7 +279,19 @@ class A8 {
      * Arrays.sort(int[]) to (partly) execute a one-pivot quicksort algorithm.
      */
     static int[] part9() {
-        //below length 48, (length <= 47) DualPivotQuicksort uses insertion sort for speed
+        /*
+            below length 48, (length <= 47) DualPivotQuicksort uses insertion sort for speed
+            as such, the array must be at least 48 elements long to use dual pivot quicksort.
+
+            Dual pivot quicksort pulls it's left pivot from a[0], and it's right pivot from
+            the end of the array, if the left pivot is greater than the right pivot, the two
+            pivots are swapped.
+
+            In order to degrade this into a single pivot quicksort, we make the left pivot
+            and right pivot equal, as such they function as a single pivot as all other elements
+            are either strictly greater, or less than or equal to the two pivots, which results
+            in the algorithm functioning as a single pivot quicksort.
+         */
         int[] a = new int[48];
         a[0] = 2; //left pivot is picked from a[0]
         a[a.length - 1] = 2; //right pivot is picked from last element of the array
