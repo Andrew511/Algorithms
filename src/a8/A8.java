@@ -54,9 +54,9 @@ class A8 {
             if (algo_num == 1) {
                 timeToRun =  Sort.algo1(array);
             } else if (algo_num == 2) {
-                timeToRun =  Sort.algo1(array);
+                timeToRun =  Sort.algo2(array);
             } else if (algo_num == 3) {
-                timeToRun =  Sort.algo1(array);
+                timeToRun =  Sort.algo3(array);
             } else {
                 System.out.println("Algorithm " + algo_num + "does not exist");
                 break; // if invalid algorithm, don't keep iterating
@@ -105,9 +105,9 @@ class A8 {
             if (algo_num == 1) {
                 timeToRun =  Sort.algo1(array);
             } else if (algo_num == 2) {
-                timeToRun =  Sort.algo1(array);
+                timeToRun =  Sort.algo2(array);
             } else if (algo_num == 3) {
-                timeToRun =  Sort.algo1(array);
+                timeToRun =  Sort.algo3(array);
             } else {
                 System.out.println("Algorithm " + algo_num + "does not exist");
                 break; // if invalid algorithm, don't keep iterating
@@ -156,9 +156,9 @@ class A8 {
             if (algo_num == 1) {
                 timeToRun =  Sort.algo1(array);
             } else if (algo_num == 2) {
-                timeToRun =  Sort.algo1(array);
+                timeToRun =  Sort.algo2(array);
             } else if (algo_num == 3) {
-                timeToRun =  Sort.algo1(array);
+                timeToRun =  Sort.algo3(array);
             } else {
                 System.out.println("Algorithm " + algo_num + "does not exist");
                 break; // if invalid algorithm, don't keep iterating
@@ -206,9 +206,9 @@ class A8 {
             if (algo_num == 1) {
                 timeToRun =  Sort.algo1(array);
             } else if (algo_num == 2) {
-                timeToRun =  Sort.algo1(array);
+                timeToRun =  Sort.algo2(array);
             } else if (algo_num == 3) {
-                timeToRun =  Sort.algo1(array);
+                timeToRun =  Sort.algo3(array);
             } else {
                 System.out.println("Algorithm " + algo_num + "does not exist");
                 break; // if invalid algorithm, don't keep iterating
@@ -257,9 +257,9 @@ class A8 {
             if (algo_num == 1) {
                 timeToRun =  Sort.algo1(array);
             } else if (algo_num == 2) {
-                timeToRun =  Sort.algo1(array);
+                timeToRun =  Sort.algo2(array);
             } else if (algo_num == 3) {
-                timeToRun =  Sort.algo1(array);
+                timeToRun =  Sort.algo3(array);
             } else {
                 System.out.println("Algorithm " + algo_num + "does not exist");
                 break; // if invalid algorithm, don't keep iterating
