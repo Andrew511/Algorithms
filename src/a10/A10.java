@@ -22,6 +22,7 @@ class A10 {
     static int[] edgeArray;
     static int solutionVal;
     static String solutionPath;
+    static HashMap<String, Pair<String, Integer>> solutions = new HashMap<String, Pair<String, Integer>>();
 
     /* load problem definition from the given file into applicable static
      * variables.
@@ -57,19 +58,19 @@ class A10 {
      */
     static void solveProblem() {
         int hEdge = 0;
-        int vEdge = (edgeArray.length / 2) + 1;
+        int vEdge = (edgeArray.length / 2);
         /* To be completed */
-        Pair leftPair = recursive(0, 1, 0, 'L', hEdge + size, vEdge + size);
+        Pair leftPair = recursive(0, 1, 0, 'L', hEdge + size, vEdge + size + 1);
         Pair rightPair = recursive(0, 0, 1, 'R', hEdge + 1, vEdge + 1);
         
         if ((int)leftPair.getValue() > (int)rightPair.getValue()) {
             int value = (int)leftPair.getValue() + edgeArray[vEdge];
-            solutionPath = (String)leftPair.getKey() + 'L';
+            solutionPath = 'L' + (String)leftPair.getKey();
             solutionVal = value;
         }
         else {
             int value = (int)rightPair.getValue() + edgeArray[hEdge];
-            solutionPath = (String)rightPair.getKey() + 'R';
+            solutionPath = 'R' + (String)rightPair.getKey();
             solutionVal = value;
         }
 
@@ -103,56 +104,78 @@ class A10 {
     /* Implement any helper method(s) that you need (if any) below
      * All methods in this class MUST be static.
      */
-    static Pair recursive(int numTurns, int numLeft, int numRight, char direction, int hEdge, int vEdge) {
+    static Pair<String, Integer> recursive(int numTurns, int numLeft, int numRight, char direction, int hEdge, int vEdge) {
         if (numLeft == size && numRight == size) {
             return new Pair("", 0);
         }
-        Pair leftPair;
-        Pair rightPair;
+        Pair<String, Integer> leftPair;
+        Pair<String, Integer> rightPair;
         if (direction == 'L') {
             if (numLeft!= size) {
-                 leftPair = recursive(numTurns, numLeft + 1, numRight, 'L', hEdge + size, vEdge + size);
+                if (solutions.containsKey(numTurns + " " + 'L' + " "  + (vEdge + size + 1))) {
+                    leftPair = solutions.get(numTurns + " " + 'L' + " "  + (vEdge + size + 1));
+                }
+                else {
+                    leftPair = recursive(numTurns, numLeft + 1, numRight, 'L', hEdge + size, vEdge + size + 1);
+                }
             }
             else {
-                 leftPair = new Pair("", Integer.MIN_VALUE);
+                 leftPair = new Pair<String, Integer>("", Integer.MIN_VALUE);
             }
             if (numRight != size) {
-                 rightPair = recursive(numTurns + 1, numLeft, numRight+1, 'R', hEdge + 1, vEdge + 1);
+                if (solutions.containsKey((numTurns + 1) + " " + 'R' + " "  + (hEdge + 1))) {
+                    rightPair = solutions.get((numTurns + 1) + " " + 'R' + " "  + (hEdge + 1));
+                }
+                else {
+                    rightPair = recursive(numTurns + 1, numLeft, numRight + 1, 'R', hEdge + 1, vEdge + 1);
+                }
             }
             else {
-                 rightPair = new Pair("", Integer.MIN_VALUE);
+                 rightPair = new Pair<String, Integer>("", Integer.MIN_VALUE);
             }
         }
         else {
             if (numLeft!= size) {
-                 leftPair = recursive(numTurns + 1, numLeft + 1, numRight, 'L', hEdge + size, vEdge + size);
+                if (solutions.containsKey((numTurns + 1) + " " + 'L' + " "  + (vEdge + size + 1))) {
+                    leftPair = solutions.get((numTurns + 1) + " " + 'L' + " "  + (vEdge + size + 1));
+                }
+                else {
+                    leftPair = recursive(numTurns + 1, numLeft + 1, numRight, 'L', hEdge + size, vEdge + size + 1);
+                }
             }
             else {
-                 leftPair = new Pair("", Integer.MIN_VALUE);
+                 leftPair = new Pair<String, Integer>("", Integer.MIN_VALUE);
             }
             if (numRight != size) {
-                 rightPair = recursive(numTurns, numLeft, numRight+1, 'R', hEdge + 1, vEdge + 1);
+                if (solutions.containsKey(numTurns + " " + 'R' + " "  + (hEdge + 1))) {
+                    rightPair = solutions.get(numTurns + " " + 'R' + " "  + (hEdge + 1));
+                }
+                else {
+                    rightPair = recursive(numTurns, numLeft, numRight + 1, 'R', hEdge + 1, vEdge + 1);
+                }
             }
             else {
-                 rightPair = new Pair("", Integer.MIN_VALUE);
+                 rightPair = new Pair<String, Integer>("", Integer.MIN_VALUE);
             }
         }
         int leftVal= Integer.MIN_VALUE;
         int rightVal = Integer.MIN_VALUE;
         if ((int)leftPair.getValue() != Integer.MIN_VALUE) {
-            leftVal = (int) leftPair.getValue() + edgeArray[vEdge] - ((direction == 'L') ? 0 : turnPenalty);
+            leftVal = (int) leftPair.getValue() + edgeArray[vEdge] - ((direction == 'L' || numTurns < minTurns) ? 0 : turnPenalty);
         }
         if ((int)rightPair.getValue() != Integer.MIN_VALUE) {
-            rightVal = (int) rightPair.getValue() + edgeArray[hEdge] - ((direction == 'R') ? 0 : turnPenalty);
+            rightVal = (int) rightPair.getValue() + edgeArray[hEdge] - ((direction == 'R' || numTurns < minTurns) ? 0 : turnPenalty);
         }
 
         if (leftVal > rightVal ) {//(int)leftPair.getValue() > (int)rightPair.getValue()) {
             int value = (int)leftPair.getValue() + edgeArray[vEdge] - ((direction == 'L') ? 0 : turnPenalty);
-            return new Pair((String)leftPair.getKey() + 'L', value);
+            solutions.put(direction + " " + numTurns + " " + vEdge, new Pair<String, Integer>( 'L' + (String)leftPair.getKey(), value) );
+            return new Pair<String, Integer>( 'L' + (String)leftPair.getKey(), value);
         }
         else {
             int value = (int)rightPair.getValue() + edgeArray[hEdge] - ((direction == 'R') ? 0 : turnPenalty);
-            return new Pair((String)rightPair.getKey() + 'R', value);
+            solutions.put(direction + " " + numTurns + " " + hEdge, new Pair<String, Integer>('R' + (String)rightPair.getKey(), value));
+            return new Pair<String, Integer>('R' + (String)rightPair.getKey(), value);
         }
     }
 
