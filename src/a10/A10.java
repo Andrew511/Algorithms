@@ -2,9 +2,9 @@
  *
  *  @version CS 321 - Fall 2018 - A10
  *
- *  @author 
+ *  @author Andrew Wrege
  *
- *  @author 2nd STUDENT'S FULL NAME GOES HERE (DELETE THIS LINE IF NOT NEEDED)
+ *  @author Blake Bostwick
  *
  */
 
@@ -84,8 +84,6 @@ class A10 {
      */
     static int getOptimalValue() {
 
-        /* To be completed */
-
         return solutionVal;
     }// getOptimalValue method
 
@@ -96,8 +94,6 @@ class A10 {
      * this method.
      */
     static String getOptimalSolution() {
-
-        /* To be completed */
 
         return solutionPath;
     }// getOptimalValue method
