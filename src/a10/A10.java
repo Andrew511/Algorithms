@@ -59,7 +59,6 @@ class A10 {
     static void solveProblem() {
         int hEdge = 0;
         int vEdge = (edgeArray.length / 2);
-        /* To be completed */
         Pair<String, Integer> leftPair = recursive(0, 1, 0, 'L', hEdge + size, vEdge + size + 1);
         Pair<String, Integer> rightPair = recursive(0, 0, 1, 'R', hEdge + 1, vEdge + 1);
 
