@@ -60,18 +60,19 @@ class A10 {
         int hEdge = 0;
         int vEdge = (edgeArray.length / 2);
         /* To be completed */
-        Pair leftPair = recursive(0, 1, 0, 'L', hEdge + size, vEdge + size + 1);
-        Pair rightPair = recursive(0, 0, 1, 'R', hEdge + 1, vEdge + 1);
-        
-        if ((int)leftPair.getValue() > (int)rightPair.getValue()) {
-            int value = (int)leftPair.getValue() + edgeArray[vEdge];
+        Pair<String, Integer> leftPair = recursive(0, 1, 0, 'L', hEdge + size, vEdge + size + 1);
+        Pair<String, Integer> rightPair = recursive(0, 0, 1, 'R', hEdge + 1, vEdge + 1);
+
+        int leftVal = leftPair.getValue() + edgeArray[vEdge];
+        int rightVal = rightPair.getValue() + edgeArray[hEdge];
+
+        if (leftVal > rightVal) {
             solutionPath = 'L' + (String)leftPair.getKey();
-            solutionVal = value;
+            solutionVal = leftVal;
         }
         else {
-            int value = (int)rightPair.getValue() + edgeArray[hEdge];
             solutionPath = 'R' + (String)rightPair.getKey();
-            solutionVal = value;
+            solutionVal = rightVal;
         }
 
     }// solveProblem method
@@ -106,7 +107,7 @@ class A10 {
      */
     static Pair<String, Integer> recursive(int numTurns, int numLeft, int numRight, char direction, int hEdge, int vEdge) {
         if (numLeft == size && numRight == size) {
-            return new Pair("", 0);
+            return new Pair<String, Integer>("", numTurns < minTurns ? Integer.MIN_VALUE : 0 );
         }
         Pair<String, Integer> leftPair;
         Pair<String, Integer> rightPair;
@@ -168,14 +169,12 @@ class A10 {
         }
 
         if (leftVal > rightVal ) {//(int)leftPair.getValue() > (int)rightPair.getValue()) {
-            int value = (int)leftPair.getValue() + edgeArray[vEdge] - ((direction == 'L') ? 0 : turnPenalty);
-            solutions.put(direction + " " + numTurns + " " + vEdge, new Pair<String, Integer>( 'L' + (String)leftPair.getKey(), value) );
-            return new Pair<String, Integer>( 'L' + (String)leftPair.getKey(), value);
+            solutions.put(direction + " " + numTurns + " " + vEdge, new Pair<String, Integer>( 'L' + (String)leftPair.getKey(), leftVal) );
+            return new Pair<String, Integer>( 'L' + (String)leftPair.getKey(), leftVal);
         }
         else {
-            int value = (int)rightPair.getValue() + edgeArray[hEdge] - ((direction == 'R') ? 0 : turnPenalty);
-            solutions.put(direction + " " + numTurns + " " + hEdge, new Pair<String, Integer>('R' + (String)rightPair.getKey(), value));
-            return new Pair<String, Integer>('R' + (String)rightPair.getKey(), value);
+            solutions.put(direction + " " + numTurns + " " + hEdge, new Pair<String, Integer>('R' + (String)rightPair.getKey(), rightVal));
+            return new Pair<String, Integer>('R' + (String)rightPair.getKey(), rightVal);
         }
     }
 
